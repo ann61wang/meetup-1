@@ -7,7 +7,7 @@ class WeetupsController < ApplicationController
 
   def show
     @weetup = Weetup.find(params[:id])
-    @comments = @weetup.comments
+    @comments = @weetup.comments.recent.paginate(:page => params[:page], :per_page => 5)
   end
 
   def new
