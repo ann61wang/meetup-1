@@ -4,7 +4,7 @@
     <%= link_to("留言", new_weetup_comment_path(@weetup), class: "btn btn-default pull-right")%>
 
     <% if current_user && current_user == @weetup.user %>
-    <%= link_to("Edit", edit_weetup_path(@weetup), class: "btn btn-primary pull-right")%>
+    <%= link_to("编辑", edit_weetup_path(@weetup), class: "btn btn-primary pull-right")%>
     <% end %>
   </div>
   <h2><%= @weetup.title %></h2>
@@ -32,7 +32,7 @@
       <% @floor = @floor + 1 %>
       <td><%= comment.content %></td>
       <td><%= comment.user.email %></td>
-      <td><%= comment.created_at %></td>
+      <td><%= comment.created_at.strftime("%Y/%m/%d %I:%M %p") %></td>
     </tr>
   <% end%>
 </tbody>
