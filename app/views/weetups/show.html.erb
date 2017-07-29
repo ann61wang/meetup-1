@@ -1,6 +1,8 @@
 <div class="col-md-12">
   <div class="weetup">
+    <% if current_user && current_user == @weetup.user %>
     <%= link_to("Edit", edit_weetup_path(@weetup), class: "btn btn-primary pull-right")%>
+    <% end %>
   </div>
   <h2><%= @weetup.title %></h2>
   <p><%= @weetup.description %></p>

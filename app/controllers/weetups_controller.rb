@@ -1,4 +1,6 @@
 class WeetupsController < ApplicationController
+  before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
+  before_action :find_weetup_and_check_permission, only: [:edit, :update, :destroy]
   def index
     @weetups = Weetup.all
   end
@@ -13,6 +15,8 @@ class WeetupsController < ApplicationController
 
   def create
     @weetup = Weetup.new(weetup_params)
+    @weetup.user = current_user
+
     if @weetup.save
       redirect_to weetups_path
     else
@@ -21,11 +25,9 @@ class WeetupsController < ApplicationController
   end
 
   def edit
-    @weetup = Weetup.find(params[:id])
   end
 
   def update
-    @weetup = Weetup.find(params[:id])
     if @weetup.update(weetup_params)
       redirect_to weetups_path, notice: "Update Success"
     else
@@ -34,13 +36,19 @@ class WeetupsController < ApplicationController
   end
 
   def destroy
-    @weetup = Weetup.find(params[:id])
     @weetup.destroy
-    flash[:alert] = "Meetup deleted"
-    redirect_to weetups_path
+    redirect_to weetups_path, alert: "Meetup deleted"
   end
 
   private
+
+  def find_weetup_and_check_permission
+    @weetup = Weetup.find(params[:id])
+
+    if current_user != @weetup.user
+      redirect_to root_path, alert: "You have no permission"
+    end
+  end
 
   def weetup_params
     params.require(:weetup).permit(:title, :description)
