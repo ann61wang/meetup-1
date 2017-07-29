@@ -1,0 +1,28 @@
+<div class="col-md-12">
+  <div class="weetup">
+    <%= link_to("New meetup", new_weetup_path, class: "btn btn-primary pull-right") %>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <td>#</td>
+        <td>Title</td>
+        <td>Description</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @weetups.each do |weetup| %>
+        <tr>
+          <td>#</td>
+          <td><%= link_to(weetup.title, weetup_path(weetup)) %></td>
+          <td><%= weetup.description %></td>
+          <td>
+              <%= link_to("Edit", edit_weetup_path(weetup), class: "btn btn-sm btn-default")%>
+              <%= link_to("Delete", weetup_path(weetup),    class: "btn btn-sm btn-default",
+                          method: :delete, data: { confirm: "Are you sure?" } )%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,2 @@
+class Weetup < ApplicationRecord
+end
