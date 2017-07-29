@@ -7,6 +7,7 @@ class WeetupsController < ApplicationController
 
   def show
     @weetup = Weetup.find(params[:id])
+    @comments = @weetup.comments
   end
 
   def new

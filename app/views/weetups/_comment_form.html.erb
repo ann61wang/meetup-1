@@ -1,0 +1,4 @@
+<%= form_for(Comment.new, url: weetup_comments_path(@weetup)) do |f| %>
+  <%= f.text_area :content %>
+  <%= f.submit "Submit", :disable_with => 'Submiting...' %>
+<% end %>
