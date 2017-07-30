@@ -2,7 +2,7 @@ class WeetupsController < ApplicationController
   before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
   before_action :find_weetup_and_check_permission, only: [:edit, :update, :destroy]
   def index
-    @weetups = Weetup.all
+    @weetups = Weetup.all.recent.paginate(:page => params[:page], :per_page => 5)
   end
 
   def show

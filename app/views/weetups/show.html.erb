@@ -22,6 +22,7 @@
         <th>留言</th>
         <th>发表者</th>
         <th>发表时间</th>
+        <th colspan="2"></th>
       </tr>
     </thead>
     <tbody>
@@ -33,6 +34,10 @@
       <td><%= comment.content %></td>
       <td><%= comment.user.email %></td>
       <td><%= comment.created_at.strftime("%Y/%m/%d %I:%M %p") %></td>
+      <% if current_user && current_user == @weetup.user %>
+      <td> <%= link_to('编辑', edit_weetup_comment_path(comment.weetup, comment), class: "btn btn-default btn-xs") %></td>
+      <td> <%= link_to('删除', weetup_comment_path(comment.weetup, comment), method: :delete, data: { confirm: " 你确定删除吗？" }, class: "btn btn-default btn-xs") %></td>
+      <% end %>
     </tr>
   <% end%>
 </tbody>

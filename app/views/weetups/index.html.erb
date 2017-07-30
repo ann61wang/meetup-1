@@ -9,6 +9,8 @@
         <td>城市</td>
         <td>详情</td>
         <td>组织者</td>
+        <th>发表时间</th>
+        <th colspan="2"></th>
       </tr>
     </thead>
     <tbody>
@@ -18,6 +20,7 @@
           <td><%= link_to(weetup.title, weetup_path(weetup)) %></td>
           <td><%= weetup.description %></td>
           <td><%= weetup.user.email %></td>
+          <td><%= weetup.created_at.strftime("%Y/%m/%d %I:%M %p") %></td>
           <td>
               <% if current_user && current_user == weetup.user %>
               <%= link_to("编辑", edit_weetup_path(weetup), class: "btn btn-sm btn-default")%>
